@@ -117,19 +117,22 @@ searchButton.addEventListener("click", (ev) => {
 function updateCount() {
 
   const creditContainer = document.querySelectorAll(".credits");
+  const prereqContainer = document.querySelectorAll(".card-link");
   const costContainer = document.querySelector("#cost");
   var count = 0
+  var prereqCount = 0;
+  var prereqCourse = new Set();
   creditContainer.forEach((e) => count += Number(e.innerHTML))
 
+  prereqContainer.forEach((e) => prereqCourse.add(e.innerHTML))
+  // Doesn't work because data doesn't contain all the prereqs. 
+  //prereqCourse.forEach((e) => { console.log(e); console.log(data.items.find(card => card.number == e)) });
+  prereqCount = prereqCourse.size * 3;
   costContainer.innerHTML = `<dt>Count</dt>
                             <dd><span>${creditContainer.length}</span> items</dd>
                             <dt>Cost</dt>
-                            <dd><span>${count}</span> credit-hours + <span>6</span> credit-hours of prereqs</dd>`;
-  console.log(count);
+                            <dd><span>${count}</span> credit-hours + <span>${prereqCount}</span> credit-hours of prereqs</dd>`;
 
-  // const count = document.getElementById("result-count");
-  // const countValue = filteredCourseCards.length;
-  // count.innerHTML = `<dt>Count</dt><dd><span>${cost}</span> items</dd>`;
 }
 // filter on structured data, put filtered data into template
 // add class to useful data, query dom for data, 
